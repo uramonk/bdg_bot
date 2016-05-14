@@ -1,3 +1,5 @@
+storage = require('../src/storage')
+
 module.exports = (robot) ->
   robot.respond /add (.*) min (\d+) max (\d+)$/, (msg) ->
     boardgame_name = msg.match[1]
@@ -12,13 +14,12 @@ module.exports = (robot) ->
       msg.send '最小人数が最大人数よりも大きいです。'
       return
 
-    # ToDo: Redisに保存する処理
+    storage.registBoardgame(robot, boardgame_name, min, max)
 
     if min == max
-      msg.send '「' + boardgame_name + '」を登録しました。¥nプレイ人数：' + min + '人'
+      msg.send "「#{boardgame_name}」を登録しました。\nプレイ人数：#{min}人"
     else
-      msg.send '「' + boardgame_name + '」を登録しました。¥nプレイ人数：'
-      + min + '〜' + max + '人'
+      msg.send "「#{boardgame_name}」を登録しました。\nプレイ人数：#{min}〜#{max}人"
 
   robot.respond /add (.*) num (\d+)$/, (msg) ->
     boardgame_name = msg.match[1]
@@ -28,6 +29,6 @@ module.exports = (robot) ->
       msg.send '1以上の数を入力してください。'
       return
 
-    # ToDo: Redisに保存する処理
+    storage.registBoardgame(robot, boardgame_name, num, num)
 
-    msg.send '「' + boardgame_name + '」を登録しました。¥nプレイ人数：' + num + '人'
+    msg.send "「#{boardgame_name}」を登録しました。\nプレイ人数：#{num}人"
