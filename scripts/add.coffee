@@ -2,7 +2,7 @@
 #   The add commands register boardgame.
 #
 # Commands:
-#   hubot ad0fdd #{boardgame_name} min #{min_number} max #{max_number} - Register the boardgame with number of player from min to max
+#   hubot add #{boardgame_name} min #{min_number} max #{max_number} - Register the boardgame with number of player from min to max
 #   hubot add #{boardgame_name} num #{number} - Register the boardgame with number of player
 
 storage = require('../src/storage')
@@ -21,7 +21,14 @@ module.exports = (robot) ->
       msg.send '最小人数が最大人数よりも大きいです。'
       return
 
-    storage.registBoardgame(robot, boardgame_name, min, max)
+    boardgames = storage.getBoardgames(robot)
+    boardgame = {
+      id: boardgames.length + 1,
+      name: boardgame_name,
+      min: min,
+      max: max
+    }
+    storage.registBoardgame(robot, boardgame)
 
     if min == max
       msg.send "「#{boardgame_name}」を登録しました。\nプレイ人数：#{min}人"

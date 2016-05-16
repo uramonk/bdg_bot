@@ -1,15 +1,7 @@
 module.exports = {
-  registBoardgame: (robot, boardgame_name, min, max) ->
+  registBoardgame: (robot, boardgame) ->
     # 保存されているボードゲーム配列を取得
-    boardgames = robot.brain.get('boardgames') ? []
-
-    # 新たに登録するボードゲームデータを作成
-    boardgame = {
-      id: boardgames.length + 1,
-      name: boardgame_name,
-      min: min,
-      max: max
-    }
+    boardgames = this.getBoardgames(robot)
 
     # ボードゲームデータを保存
     boardgames.push(boardgame)
