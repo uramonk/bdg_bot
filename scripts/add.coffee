@@ -22,8 +22,19 @@ module.exports = (robot) ->
       return
 
     boardgames = storage.getBoardgames(robot)
+    new_id = boardgames.length + 1
+
+    boardgames.sort (a, b) ->
+      if a.id < b.id
+        -1
+      else
+        1
+    .map (item) ->
+      if item.id == new_id
+        new_id += 1
+
     boardgame = {
-      id: boardgames.length + 1,
+      id: new_id,
       name: boardgame_name,
       min: min,
       max: max
