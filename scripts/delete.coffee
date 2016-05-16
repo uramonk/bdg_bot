@@ -5,4 +5,3 @@ module.exports = (robot) ->
     id = Number(msg.match[1])
     storage.unregisterBoardgame(robot, id)
     boardgames = storage.getBoardgames(robot)
-    console.log(boardgames)
