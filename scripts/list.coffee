@@ -14,19 +14,20 @@ module.exports = (robot) ->
       return
 
     boardgame_list = ''
-    for i in [0..boardgames.length]
-      boardgame = boardgames[i]
-      console.log(boardgame)
-
-      id = boardgame.id
-      console.log(id)
-      name = boardgame.name
-      min = boardgame.min
-      max = boardgame.max
+    boardgames.sort (a, b) ->
+      if a.id < b.id
+        -1
+      else
+        1
+    .map (item) ->
+      id = item.id
+      name = item.name
+      min = item.min
+      max = item.max
 
       if min == max
-        boardgame_list += "#{id}: #{name}\n人数: #{min}人"
+        boardgame_list += "#{id}: #{name}, プレイ人数: #{min}人\n"
       else
-        boardgame_list += "#{id}: #{name}\n人数: #{min}〜#{max}人"
+        boardgame_list += "#{id}: #{name}, プレイ人数: #{min}〜#{max}人\n"
 
     msg.send '```\n' + boardgame_list + '```\n'
