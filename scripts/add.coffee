@@ -1,3 +1,10 @@
+# Description:
+#   The add commands register boardgame.
+#
+# Commands:
+#   hubot ad0fdd #{boardgame_name} min #{min_number} max #{max_number} - Register the boardgame with number of player from min to max
+#   hubot add #{boardgame_name} num #{number} - Register the boardgame with number of player
+
 storage = require('../src/storage')
 
 module.exports = (robot) ->

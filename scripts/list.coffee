@@ -1,3 +1,9 @@
+# Description:
+#   The list commands show boardgames registered in hubot.
+#
+# Commands:
+#   hubot list - Show boardgames registered
+
 storage = require('../src/storage')
 
 module.exports = (robot) ->
@@ -13,6 +19,7 @@ module.exports = (robot) ->
       console.log(boardgame)
 
       id = boardgame.id
+      console.log(id)
       name = boardgame.name
       min = boardgame.min
       max = boardgame.max
