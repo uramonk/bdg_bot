@@ -5,7 +5,6 @@
 #   hubot plan day #{yyyy/MM/DD} time #{hh:mm} min #{least_player_number}  max #{max_player_nunmber} - Plan boardgame party
 
 storage = require('../src/storage')
-request = require('request')
 
 module.exports = (robot) ->
   robot.respond /plan day (\d{4}\/\d{2}\/\d{2}) time (\d{2}:\d{2}) min (\d+) max (\d+)$/, (msg) ->
@@ -23,14 +22,13 @@ module.exports = (robot) ->
 
   addVoteReactions = (msg, reaction) ->
     options = {
-      url: 'https://slack.com/api/reactions.add',
-      qs: {
-        'token': process.env.HUBOT_SLACK_TOKEN,
-        'name': reaction,
-        'channel': msg.message.rawMessage.channel
-        'timestamp': msg.message.rawMessage.ts
-      }
+      'token': process.env.HUBOT_SLACK_TOKEN,
+      'name': reaction,
+      'channel': msg.message.rawMessage.channel
+      'timestamp': msg.message.rawMessage.ts
     }
-    request.post options, (err, res, body) ->
-      if err? || res.statusCode != 200
-        robot.logger.error("Failed to add emoji reaction #{JSON.stringify(err)}")
+    msg.http('https://slack.com/api/reactions.add')
+      .query(options)
+      .post() (err, res, body) ->
+        console.log('post')
+        return
