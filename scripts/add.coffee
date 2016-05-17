@@ -23,7 +23,7 @@ module.exports = (robot) ->
 
     boardgames = storage.getBoardgames(robot)
     new_id = boardgames.length + 1
-    
+
     boardgames.sort (a, b) ->
       if a.id < b.id
         -1
@@ -34,10 +34,10 @@ module.exports = (robot) ->
         new_id += 1
 
     boardgame = {
-      id: new_id,
-      name: boardgame_name,
-      min: min,
-      max: max
+      'id': new_id,
+      'name': boardgame_name,
+      'min': min,
+      'max': max
     }
     storage.registBoardgame(robot, boardgame)
 
