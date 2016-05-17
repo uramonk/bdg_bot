@@ -2,7 +2,8 @@
 #   The list commands show boardgames registered in hubot.
 #
 # Commands:
-#   hubot delete - Show boardgames registered
+#   hubot list - Show boardgames registered
+#   hubot list num #{player_num} - Show boardgames which can play it by player_number
 
 storage = require('../src/storage')
 

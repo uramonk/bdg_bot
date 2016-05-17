@@ -1,3 +1,9 @@
+# Description:
+#   The list commands show boardgames registered in hubot.
+#
+# Commands:
+#   hubot delete - Show boardgames registered
+
 storage = require('../src/storage')
 
 module.exports = (robot) ->
