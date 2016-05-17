@@ -14,9 +14,8 @@ has, etc!
 
 ### Running bdg_bot Locally
 
-You can test your hubot by running the following, however some plugins will not
-behave as expected unless the environment variables they rely upon have been
-set.
+You can test your hubot by running the following, however msg.finish() in
+1_limit.coffee must be commented out. 
 
 You can start bdg_bot locally by running:
 
