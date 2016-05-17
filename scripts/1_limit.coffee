@@ -11,6 +11,6 @@ module.exports = (robot) ->
       return
 
   robot.hear /.*/, (msg) ->
-    unless _.contains [config.getSlackChannel()], msg.envelope.room
+    unless _.contains [process.env.HUBOT_SLACK_CHANNEL, process.env.HUBOT_SLACK_CHANNEL_DEV], msg.envelope.room
       msg.finish()
       return
