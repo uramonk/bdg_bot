@@ -14,7 +14,7 @@ module.exports = (robot) ->
       msg.send '登録されているボードゲームはありません。'
       return
 
-    boardgames_message = getBoardgameListMessage(boardgames)
+    boardgames_message = bdg.getBoardgameListMessage(boardgames)
     msg.send '```\n' + boardgames_message + '```\n'
 
   robot.respond /list num (\d+)$/, (msg) ->
@@ -25,22 +25,8 @@ module.exports = (robot) ->
       msg.send '登録されているボードゲームはありません。'
       return
 
-    boardgames_message = getBoardgameListMessage(boardgames)
+    boardgames_message = bdg.getBoardgameListMessage(boardgames)
     if boardgames_message == ''
       msg.send "#{player_num}人でプレイ可能なボードゲームはありません。"
     else
       msg.send '```\n' + boardgames_message + '```\n'
-
-  getBoardgameListMessage = (boardgames) ->
-    boardgames_message = ''
-    boardgames.map (item) ->
-      id = item.id
-      name = item.name
-      min = item.min
-      max = item.max
-
-      if min == max
-        boardgames_message += "#{id}: #{name}, プレイ人数: #{min}人\n"
-      else
-        boardgames_message += "#{id}: #{name}, プレイ人数: #{min}〜#{max}人\n"
-    return boardgames_message

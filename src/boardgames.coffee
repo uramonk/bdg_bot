@@ -26,4 +26,18 @@ module.exports = {
         new_boardgames.push(item)
 
     return new_boardgames
+
+  getBoardgameListMessage: (boardgames) ->
+    boardgames_message = ''
+    boardgames.map (item) ->
+      id = item.id
+      name = item.name
+      min = item.min
+      max = item.max
+
+      if min == max
+        boardgames_message += "#{id}: #{name}, プレイ人数: #{min}人\n"
+      else
+        boardgames_message += "#{id}: #{name}, プレイ人数: #{min}〜#{max}人\n"
+    return boardgames_message
 }
