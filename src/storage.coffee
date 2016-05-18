@@ -20,4 +20,23 @@ module.exports = {
         new_boardgames.push(item)
     robot.brain.set('boardgames', new_boardgames)
     robot.brain.save
+
+  getBoardgame: (robot, id) ->
+    boardgame = null
+    boardgames = this.getBoardgames(robot)
+    boardgames.map (item) ->
+      if item.id == id
+        boardgame = item
+    return boardgame
+
+  updateBoardgame: (robot, boardgame) ->
+    boardgames = this.getBoardgames(robot)
+    new_boardgames = []
+    boardgames.map (item) ->
+      if item.id != boardgame.id
+        new_boardgames.push(item)
+      else
+        new_boardgames.push(boardgame)
+    robot.brain.set('boardgames', new_boardgames)
+    robot.brain.save
 }
