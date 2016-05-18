@@ -3,7 +3,7 @@
 #
 # Commands:
 #   hubot list - Show boardgames registered
-#   hubot list num #{player_num} - Show boardgames which can play it by player_number
+#   hubot list num #{player_num} - Show boardgames which can be played by player_number
 
 bdg = require('../src/boardgames')
 

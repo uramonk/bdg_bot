@@ -1,8 +1,8 @@
 # Description:
-#   The list commands show boardgames registered in hubot.
+#   The delete commands delete boardgame registered in hubot.
 #
 # Commands:
-#   hubot delete - Show boardgames registered
+#   hubot delete - Delete boardgame registered
 
 storage = require('../src/storage')
 

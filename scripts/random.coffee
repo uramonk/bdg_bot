@@ -1,3 +1,10 @@
+# Description:
+#   The random commands show random boardgame registered in hubot.
+#
+# Commands:
+#   hubot random - Show random boardgame
+#   hubot random num #{player_num} - Show random boardgame which can be played by player_number
+
 bdg = require('../src/boardgames')
 
 module.exports = (robot) ->

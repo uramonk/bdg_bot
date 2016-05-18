@@ -1,3 +1,9 @@
+# Description:
+#   The update commands update boardgame registered in hubot.
+#
+# Commands:
+#   hubot update #{id} name #{new_boardgame_name} min #{new_min_number} max #{new_max_number} - Update boardgame which id is #{id}
+
 storage = require('../src/storage')
 
 module.exports = (robot) ->
