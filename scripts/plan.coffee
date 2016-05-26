@@ -4,7 +4,6 @@
 # Commands:
 #   hubot plan day #{yyyy/MM/DD} time #{hh:mm} min #{least_player_number}  max #{max_player_nunmber} - Plan boardgame party
 
-_ = require 'lodash'
 storage = require('../src/storage')
 
 module.exports = (robot) ->
@@ -18,9 +17,6 @@ module.exports = (robot) ->
 最小開催人数は#{min}人、最大人数は#{max}人までとなります。\n
 参加可否をよろしくお願い致します。"
 
-  robot.hear /.*ボードゲーム会を開催します。\n最小開催人数は.*までとなります。\n参加可否をよろしくお願い致します。&/, (msg) ->
-    unless _.contains ['bdg_bot'], msg.envelope.user.name
-      msg.finish()
     addVoteReactions(msg, 'o')
     addVoteReactions(msg, 'x')
 
