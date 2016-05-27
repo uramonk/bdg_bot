@@ -38,3 +38,19 @@ module.exports = (robot) ->
       ['o', 'x'].reduce((curr, name) ->
         curr.then(-> addReaction(name, channelId, res.ts))
       , Promise.resolve())
+
+  robot.adapter.client.on 'raw_message', (message) ->
+    robotId = robot.adapter.client.getUserByName(robot.name).id
+    user = robot.adapter.client.getUserByID(message.user)
+    if (/^reaction_added$/.test message.type) && (message.user isnt robotId)
+      if /^o$/.test message.reaction
+        ms = "#{user.name}さんが参加しました。"
+        postMessage(ms, message.item.channel)
+      #else if /^x$/.test message.reaction
+        #postMessage('不参加', message.item.channel)
+    else if (/^reaction_removed$/.test message.type) && (message.user isnt robotId)
+      if /^o$/.test message.reaction
+        ms = "#{user.name}さんがキャンセルしました。"
+        postMessage(ms, message.item.channel)
+      #else if /^x$/.test message.reaction
+        #postMessage('不参加キャンセル', message.item.channel)
