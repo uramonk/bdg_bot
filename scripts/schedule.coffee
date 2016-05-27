@@ -4,6 +4,7 @@
 # Commands:
 #   hubot schedule list - show boardgame party schedules
 
+storage = require('../src/storage')
 bdg = require('../src/boardgames')
 
 module.exports = (robot) ->
@@ -15,3 +16,7 @@ module.exports = (robot) ->
 
     parties_message = bdg.getPartyListMessage(parties)
     msg.send '```\n' + parties_message + '```\n'
+
+  robot.respond /schedule delete (\d+)$/, (msg) ->
+    id = Number(msg.match[1])
+    storage.unregistParty(robot, id)
