@@ -29,6 +29,27 @@ module.exports = (robot) ->
     min = msg.match[3]
     max = msg.match[4]
 
+    parties = storage.getParties(robot)
+    new_id = parties.length + 1
+
+    parties.sort (a, b) ->
+      if a.id < b.id
+        -1
+      else
+        1
+    .map (item) ->
+      if item.id == new_id
+        new_id += 1
+
+    party = {
+      'id': new_id,
+      'day': day,
+      'time': time,
+      'min': min,
+      'max': max
+    }
+    storage.registParty(robot, party)
+
     msg.send "#{day}の#{time}からボードゲーム会を開催します。\n
 最小開催人数は#{min}人、最大人数は#{max}人までとなります。"
 

@@ -39,4 +39,31 @@ module.exports = {
         new_boardgames.push(boardgame)
     robot.brain.set('boardgames', new_boardgames)
     robot.brain.save
+
+  registParty: (robot, party) ->
+    parties = this.getParties(robot)
+    parties.push(party)
+    robot.brain.set('parties', parties)
+    robot.brain.save
+
+  getParties: (robot) ->
+    parties = robot.brain.get('parties') ? []
+    return parties
+
+  unregistParty: (robot, id) ->
+    parties = this.getParties(robot)
+    new_parties = []
+    parties.map (item) ->
+      if item.id != id
+        new_parties.push(item)
+    robot.brain.set('parties', new_parties)
+    robot.brain.save
+
+  getParty: (robot, id) ->
+    party = null
+    parties = this.getParties(robot)
+    parties.map (item) ->
+      if item.id == id
+        party = item
+    return party
 }
