@@ -9,7 +9,7 @@ storage = require('../src/storage')
 _ = require 'lodash'
 
 module.exports = (robot) ->
-  postMessage = (msg, channelId) -> new Promise (resolved) ->
+  postMessage = (msg, channelId) -> new Promise (resolve) ->
     robot.adapter.client._apiCall 'chat.postMessage',
       channel: channelId
       text: msg

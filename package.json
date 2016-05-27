@@ -13,7 +13,7 @@
     "hubot-redis-brain": "0.0.3",
     "hubot-slack": "^3.4.2",
     "lodash": "^3.10.1",
-    "es6-promise": "3.2.2"
+    "es6-promise": "3.2.1"
   },
   "engines": {
     "node": "0.10.x"
