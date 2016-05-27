@@ -12,21 +12,6 @@ has, etc!
 [hubot]: http://hubot.github.com
 [generator-hubot]: https://github.com/github/generator-hubot
 
-### Running bdg_bot Locally
-
-You can test your hubot by running the following, however msg.finish() in
-1_limit.coffee must be commented out. 
-
-You can start bdg_bot locally by running:
-
-    % bin/hubot
-
-You'll see some start up output and a prompt:
-
-    bdg_bot>
-
-Then you can interact with bdg_bot by typing `bdg_bot help`.
-
 ### Deploy to heroku
 
     % heroku login
