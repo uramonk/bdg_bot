@@ -58,10 +58,12 @@ module.exports = (robot) ->
         'min': min,
         'max': max,
         'timestamp': res.ts,
-        'channelId': channelId
+        'channelId': channelId,
+        'participants': [
+          msg.envelope.user.name
+        ]
       }
       storage.registParty(robot, party)
-      console.log("registParty timestamp: #{res.ts}, channelId: #{channelId}")
 
   robot.adapter.client.on 'raw_message', (message) ->
     return if message.type isnt 'reaction_added' && message.type isnt 'reaction_removed'

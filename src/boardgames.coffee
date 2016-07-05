@@ -58,7 +58,19 @@ module.exports = {
       time = item.time
       min = item.min
       max = item.max
+      participants = item.participants
 
       parties_message += "[#{id}] 開催日: #{day} #{time}\n"
+      parties_message += "  参加者: "
+      if participants.length == 0
+        parties_message += "いません"
+      else
+        i = 0
+        participants.map (item) ->
+          if i == 0
+            parties_message += "#{item}"
+          else
+            parties_message += ", #{item}"
+
     return parties_message
 }
