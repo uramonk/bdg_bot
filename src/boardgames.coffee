@@ -61,16 +61,19 @@ module.exports = {
       participants = item.participants
 
       parties_message += "[#{id}] 開催日: #{day} #{time}\n"
-      parties_message += "  参加者: "
+      parties_message += "    参加者: "
       if participants.length == 0
         parties_message += "いません"
       else
         i = 0
         participants.map (item) ->
+          name = item
+          t_name = name.slice(1)
+          name = name.slice(0, 1) + "." + t_name
           if i == 0
-            parties_message += "#{item}"
+            parties_message += "#{name}"
           else
-            parties_message += ", #{item}"
+            parties_message += ", #{name}"
 
     return parties_message
 }
