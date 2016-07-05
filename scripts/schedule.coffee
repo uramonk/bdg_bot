@@ -3,6 +3,7 @@
 #
 # Commands:
 #   hubot schedule list - show boardgame party schedules
+#   hubot schedule delete #{schedule_id} - delete boardgame party schedule
 
 storage = require('../src/storage')
 bdg = require('../src/boardgames')
