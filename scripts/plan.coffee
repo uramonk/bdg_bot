@@ -41,15 +41,6 @@ module.exports = (robot) ->
       if item.id == new_id
         new_id += 1
 
-    party = {
-      'id': new_id,
-      'day': day,
-      'time': time,
-      'min': min,
-      'max': max
-    }
-    storage.registParty(robot, party)
-
     msg.send "#{day}の#{time}からボードゲーム会を開催します。\n
 最小開催人数は#{min}人、最大人数は#{max}人までとなります。"
 
@@ -60,9 +51,33 @@ module.exports = (robot) ->
         curr.then(-> addReaction(name, channelId, res.ts))
       , Promise.resolve())
 
+      party = {
+        'id': new_id,
+        'day': day,
+        'time': time,
+        'min': min,
+        'max': max,
+        'timestamp': res.ts,
+        'channelId': channelId
+      }
+      storage.registParty(robot, party)
+      console.log("registParty timestamp: #{res.ts}, channelId: #{channelId}")
+
   robot.adapter.client.on 'raw_message', (message) ->
+    return if message.type isnt 'reaction_added' && message.type isnt 'reaction_removed'
+
     robotId = robot.adapter.client.getUserByName(robot.name).id
     user = robot.adapter.client.getUserByID(message.user)
+    parties = storage.getParties(robot)
+    ts = message.item.ts
+    channelId = message.item.channel
+    found = false
+    parties.map (item) ->
+      if item.timestamp is ts && item.channelId is channelId
+        found = true
+
+    if found == false
+      return
     if (/^reaction_added$/.test message.type) && (message.user isnt robotId)
       if /^o$/.test message.reaction
         ms = "#{user.name}さんが参加しました。"
