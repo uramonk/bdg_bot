@@ -67,8 +67,11 @@ module.exports = (robot) ->
 
   robot.adapter.client.on 'raw_message', (message) ->
     return if message.type isnt 'reaction_added' && message.type isnt 'reaction_removed'
+    return if message.reaction isnt 'o'
 
     robotId = robot.adapter.client.getUserByName(robot.name).id
+    return if message.user is robotId
+
     user = robot.adapter.client.getUserByID(message.user)
     parties = storage.getParties(robot)
     ts = message.item.ts
@@ -78,22 +81,15 @@ module.exports = (robot) ->
       if item.timestamp is ts && item.channelId is channelId
         party = item
 
-    if party == null
-      return
+    return if party == null
 
-    if (/^reaction_added$/.test message.type) && (message.user isnt robotId)
-      if /^o$/.test message.reaction
-        ms = "#{user.name}さんが参加しました。"
-        postMessage(ms, message.item.channel)
-        party.participants.push(user.name)
-        storage.updateParty(robot, party)
-      #else if /^x$/.test message.reaction
-        #postMessage('不参加', message.item.channel)
-    else if (/^reaction_removed$/.test message.type) && (message.user isnt robotId)
-      if /^o$/.test message.reaction
-        ms = "#{user.name}さんがキャンセルしました。"
-        postMessage(ms, message.item.channel)
-        party.participants.pop(user.name)
-        storage.updateParty(robot, party)
-      #else if /^x$/.test message.reaction
-        #postMessage('不参加キャンセル', message.item.channel)
+    if message.type is 'reaction_added'
+      ms = "#{user.name}さんが参加しました。"
+      postMessage(ms, message.item.channel)
+      party.participants.push(user.name)
+      storage.updateParty(robot, party)
+    else if message.type is 'reaction_removed'
+      ms = "#{user.name}さんがキャンセルしました。"
+      postMessage(ms, message.item.channel)
+      party.participants.pop(user.name)
+      storage.updateParty(robot, party)
