@@ -2,7 +2,7 @@
 #   The delete commands delete boardgame registered in hubot.
 #
 # Commands:
-#   hubot delete - Delete boardgame registered
+#   hubot delete #{id} - Delete boardgame registered
 
 storage = require('../src/storage')
 

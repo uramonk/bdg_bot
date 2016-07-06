@@ -76,5 +76,6 @@ module.exports = {
             parties_message += ", #{name}"
           i += 1
 
+      parties_message += "\n"
     return parties_message
 }
