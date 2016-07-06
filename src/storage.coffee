@@ -66,4 +66,16 @@ module.exports = {
       if item.id == id
         party = item
     return party
+
+  updateParty: (robot, party) ->
+    parties = this.getParties(robot)
+    new_parties = []
+    parties.map (item) ->
+      if item.id != party.id
+        new_parties.push(item)
+      else
+        new_parties.push(party)
+    robot.brain.set('parties', new_parties)
+    robot.brain.save
+
 }

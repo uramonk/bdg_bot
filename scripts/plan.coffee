@@ -73,22 +73,27 @@ module.exports = (robot) ->
     parties = storage.getParties(robot)
     ts = message.item.ts
     channelId = message.item.channel
-    found = false
+    party = null
     parties.map (item) ->
       if item.timestamp is ts && item.channelId is channelId
-        found = true
+        party = item
 
-    if found == false
+    if party == null
       return
+
     if (/^reaction_added$/.test message.type) && (message.user isnt robotId)
       if /^o$/.test message.reaction
         ms = "#{user.name}さんが参加しました。"
         postMessage(ms, message.item.channel)
+        party.participants.push(user.name)
+        storage.updateParty(robot, party)
       #else if /^x$/.test message.reaction
         #postMessage('不参加', message.item.channel)
     else if (/^reaction_removed$/.test message.type) && (message.user isnt robotId)
       if /^o$/.test message.reaction
         ms = "#{user.name}さんがキャンセルしました。"
         postMessage(ms, message.item.channel)
+        party.participants.pop(user.name)
+        storage.updateParty(robot, party)
       #else if /^x$/.test message.reaction
         #postMessage('不参加キャンセル', message.item.channel)
