@@ -22,7 +22,7 @@ module.exports = (robot) ->
     msg.send '```\n' + message + '```\n'
 
   getRandomBoardgame = (boardgames) ->
-    random_index = Math.floor(Math.random() * (boardgames.length - 1 + 1))
+    random_index = Math.floor(Math.random() * boardgames.length)
     boardgame = []
     boardgame.push(boardgames[random_index])
     return boardgame
