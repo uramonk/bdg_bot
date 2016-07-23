@@ -6,6 +6,12 @@
 
 module.exports = (robot) ->
   robot.respond /place|住所|場所$/, (msg) ->
+    showPlace(msg)
+
+  robot.hear /場所は|どこでした|どこだっけ|どこで開催|どのあたり|どの場所/, (msg) ->
+    showPlace(msg)
+
+  showPlace = (msg) ->
     unless process.env.HUBOT_SLACK_BOARDGAME_PLACE
       msg.send '開催場所が登録されていません。'
       return
