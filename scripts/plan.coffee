@@ -84,12 +84,12 @@ module.exports = (robot) ->
     return if party == null
 
     if message.type is 'reaction_added'
-      ms = "#{user.name}さんが参加しました。"
+      ms = "#{user.name}さんが参加予定です。"
       postMessage(ms, message.item.channel)
       party.participants.push(user.name)
       storage.updateParty(robot, party)
     else if message.type is 'reaction_removed'
-      ms = "#{user.name}さんがキャンセルしました。"
+      ms = "#{user.name}さんが参加予定をキャンセルしました。"
       postMessage(ms, message.item.channel)
       party.participants.pop(user.name)
       storage.updateParty(robot, party)
