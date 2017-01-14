@@ -16,7 +16,7 @@ module.exports = (robot) ->
     id = Number(msg.match[1])
     storage.unregistParty(robot, id)
 
-  robot.hear /何時から|何時開催|何時開始/, (msg) ->
+  robot.hear /何時から|何時開催|何時開始|スケジュール/, (msg) ->
     showScheduleList(msg)
 
   showScheduleList = (msg) ->
