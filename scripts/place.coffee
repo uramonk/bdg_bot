@@ -8,7 +8,7 @@ module.exports = (robot) ->
   robot.respond /place|住所|場所$/, (msg) ->
     showPlace(msg)
 
-  robot.hear /場所は|どこでした|どこだっけ|どこで開催|どのあたり|どの場所/, (msg) ->
+  robot.hear /場所|どこでした|どこだっけ|どこで開催|どのあたり/, (msg) ->
     showPlace(msg)
 
   showPlace = (msg) ->
